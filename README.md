@@ -1,0 +1,1 @@
+# cpu-collectd-plugin
