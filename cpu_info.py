@@ -45,7 +45,8 @@ def configure_callback(conf):
         if node.key == 'Name':
             NAME = node.values[0]
         elif node.key == 'Verbose':
-            VERBOSE = node.values[0]
+            if node.values[0] == 'False':
+                VERBOSE = False
         else:
             log('warn', 'Unknown config key: {}'.format(node.key))
 
