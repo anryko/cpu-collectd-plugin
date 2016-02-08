@@ -26,14 +26,14 @@ def log(t, message):
     """ Log messages to collectd logger
     """
     if t == 'err':
-        collectd.error('{}: {}'.format(NAME, message))
+        collectd.error('{0}: {1}'.format(NAME, message))
     elif t == 'warn':
-        collectd.warning('{}: {}'.format(NAME, message))
+        collectd.warning('{0}: {1}'.format(NAME, message))
     elif t == 'verb':
         if VERBOSE:
-            collectd.info('{}: {}'.format(NAME, message))
+            collectd.info('{0}: {1}'.format(NAME, message))
     else:
-        collectd.info('{}: {}'.format(NAME, message))
+        collectd.info('{0}: {1}'.format(NAME, message))
 
 
 def configure_callback(conf):
@@ -48,7 +48,7 @@ def configure_callback(conf):
             if node.values[0] == 'False':
                 VERBOSE = False
         else:
-            log('warn', 'Unknown config key: {}'.format(node.key))
+            log('warn', 'Unknown config key: {0}'.format(node.key))
 
 
 def read_callback():
@@ -63,7 +63,7 @@ def read_callback():
         return
 
     for metric, percent in stats:
-        log('verb', 'Sending value: {} {}'.format(metric, percent))
+        log('verb', 'Sending value: {0} {1}'.format(metric, percent))
         value = collectd.Values(plugin=NAME)
         value.type = 'percent'
         value.type_instance = metric
@@ -100,5 +100,5 @@ def get_cpustats():
 
 # Register to collectd
 collectd.register_config(configure_callback)
-collectd.warning('Initialising {}'.format(NAME))
+collectd.warning('Initialising {0}'.format(NAME))
 collectd.register_read(read_callback)
